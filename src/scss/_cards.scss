@@ -39,13 +39,11 @@
 .info {
   height:60px;
   display: flex;
-  gap: 10px;
+
   justify-content: space-around;
   color: #444;
   &__box {
-//   height: auto;
-// max-width: ;
-// margin: auto;
+
     flex-direction: column;
     align-items: center;
     display: flex;
@@ -57,9 +55,7 @@
 }
 
 .material-symbols-outlined {
-//   margin: 0;
-//   margin-top: 20px;
-  // padding: 10px;
+
   color: rgb(255, 208, 0);
 }
 .info-counter {

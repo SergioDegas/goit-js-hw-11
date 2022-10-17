@@ -83,9 +83,16 @@ async function createCards() {
   // scroll()
 }
 
+
+
 function clearList() {
   cardsGallery.innerHTML = '';
 }
+
+
+
+
+
 function simpleLightbox() {
   // e.preventDefault()
   let lightbox = new SimpleLightbox('.gallery a', {
@@ -98,6 +105,9 @@ function simpleLightbox() {
   lightbox.refresh();
 }
 
+
+
+
 function scroll() {
   const { height: cardHeight } = document
     .querySelector('.gallery')
@@ -109,6 +119,9 @@ function scroll() {
     behavior: 'smooth',
   });
 }
+
+
+
 
 async function infiniteScroll() {
   try {

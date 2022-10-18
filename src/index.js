@@ -15,7 +15,6 @@ ellipse.classList.add('is-hidden');
 clearList();
 async function onSearch(e) {
   e.preventDefault();
-
   fetch.searchQuery = e.currentTarget.elements.searchQuery.value;
   fetch.resetPage();
   clearList();
@@ -32,12 +31,12 @@ async function onSearch(e) {
         data: { hits, total, totalHits },
       } = response;
 
-      let totalPages = totalHits / fetch.perPage;
+      // let totalPages = totalHits / fetch.perPage;
 
-      // console.log(totalPages);
-      if (fetch.thisPage > totalPages) {
-        ellipse.classList.add('is-hidden');
-      }
+      // // console.log(totalPages);
+      // if (fetch.thisPage > totalPages) {
+      //   ellipse.classList.add('is-hidden');
+      // }
 
       if (hits.length === 0) {
         window.removeEventListener('scroll', createCards);
@@ -60,12 +59,25 @@ async function onSearch(e) {
 
         // createCards();        // window.addEventListener('scroll', createCards);
       }
-      if (total < 40) {
+      if (total < 40 && fetch.page >= fetch.thisPage) {
+        window.removeEventListener('scroll', createCards);
         ellipse.classList.add('is-hidden');
+        Notify.failure(
+          "We're sorry, but you've reached the end of search results."
+        );
       }
+
+      // const allCards = totalHits / hits.length;
+      // console.log(hits.length);
+      // console.log(totalHits)
       // ellipse.classList.remove('is-hidden');
     }
+
+
+    
   } catch (error) {
+      console.loh(fetch.page);
+
     window.removeEventListener('scroll', createCards);
     setTimeout(
       Notify.failure(

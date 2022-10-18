@@ -9,13 +9,11 @@ export default class fetchApi {
     this.searchQuery = '';
     this.perPage = 40;
     this.page = 1;
-   
   }
 
   async makesRequest() {
-  
     const params = new URLSearchParams({
-      key: API_KEY, 
+      key: API_KEY,
       q: this.searchQuery,
       image_type: 'photo',
       orientation: 'horizontal',
@@ -24,28 +22,24 @@ export default class fetchApi {
       per_page: this.perPage,
     });
     const url = `${BASE_URL}/?${params}`;
-   
-    
+
     this.incrementPage();
-  
+
     return await axios.get(url);
   }
 
   get perPages() {
-   return this.perPage = 40;
+    return (this.perPage = 40);
   }
-
+  get thisPage() {
+    return this.page;
+  }
   incrementPage() {
     this.page += 1; //добавлення сторінки з бек при скролі
   }
-  
-  resetPage() {
-   
-    this.page = 1; //скидання сторінки
-  }
 
-  get thisPage() {
-   return this.page = 1; 
+  resetPage() {
+    this.page = 1; //скидання сторінки
   }
 
   get query() {
@@ -53,8 +47,6 @@ export default class fetchApi {
   }
   //Контроль  запроса
   set query(newQuery) {
-   
-
     this.searchQuery = newQuery;
   }
 }

@@ -76,7 +76,7 @@ async function onSearch(e) {
 
     
   } catch (error) {
-      console.loh(fetch.page);
+      // console.loh(fetch.page);
 
     window.removeEventListener('scroll', createCards);
     setTimeout(

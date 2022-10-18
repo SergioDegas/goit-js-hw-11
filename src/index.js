@@ -27,7 +27,6 @@ async function onSearch(e) {
       // clearList();
       Notify.failure('Please enter your search data.');
     } else {
-      ellipse.classList.remove('is-hidden');
       const response = await fetch.makesRequest();
       const {
         data: { hits, total, totalHits },
@@ -65,7 +64,7 @@ async function onSearch(e) {
 // createCards();        // window.addEventListener('scroll', createCards);
       }
 
-      ellipse.classList.remove('is-hidden');
+      // ellipse.classList.remove('is-hidden');
     }
   } catch (error) {
     window.removeEventListener('scroll', createCards);

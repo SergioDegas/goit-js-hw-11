@@ -34,7 +34,7 @@ async function onSearch(e) {
 
       let totalPages = totalHits / fetch.perPage;
 
-      console.log(totalPages);
+      // console.log(totalPages);
       if (fetch.thisPage > totalPages) {
         ellipse.classList.add('is-hidden');
       }

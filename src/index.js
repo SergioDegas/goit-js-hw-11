@@ -79,12 +79,12 @@ async function onSearch(e) {
       // console.loh(fetch.page);
 
     window.removeEventListener('scroll', createCards);
-    setTimeout(
-      Notify.failure(
-        "We're sorry, but you've reached the end of search results."
-      ),
-      10
-    );
+    // setTimeout(
+    //   Notify.failure(
+    //     "We're sorry, but you've reached the end of search results."
+    //   ),
+    //   10
+    // );
 
     // console.log(error.message);
     ellipse.classList.add('is-hidden');

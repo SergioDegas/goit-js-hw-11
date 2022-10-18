@@ -18,11 +18,11 @@ async function onSearch(e) {
 
   fetch.searchQuery = e.currentTarget.elements.searchQuery.value;
   fetch.resetPage();
-      clearList();
+  clearList();
 
   try {
     if (fetch.searchQuery === '') {
-        ellipse.classList.add('is-hidden');
+      ellipse.classList.add('is-hidden');
 
       // clearList();
       Notify.failure('Please enter your search data.');
@@ -50,20 +50,19 @@ async function onSearch(e) {
           0
         );
         ellipse.classList.add('is-hidden');
-
       } else {
         ellipse.classList.remove('is-hidden');
         Notify.success(`Hooray! We found ${totalHits} images.`);
         renderGallery(hits);
 
         window.addEventListener('scroll', createCards);
- fetch.incrementPage();
-        
+        fetch.incrementPage();
 
-
-// createCards();        // window.addEventListener('scroll', createCards);
+        // createCards();        // window.addEventListener('scroll', createCards);
       }
-
+      if (total < 40) {
+        ellipse.classList.add('is-hidden');
+      }
       // ellipse.classList.remove('is-hidden');
     }
   } catch (error) {
@@ -82,11 +81,10 @@ async function onSearch(e) {
 
 async function createCards() {
   ellipse.classList.remove('is-hidden');
-// clearList();
+  // clearList();
 
   const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
   if (scrollTop + clientHeight > scrollHeight - 5) {
-
     infiniteScroll();
   }
 
@@ -124,11 +122,10 @@ function scroll() {
 async function infiniteScroll(e) {
   // e.preventDefault();
   // fetch.resetPage();
-// clearList();
+  // clearList();
 
   try {
-      // clearList();
-
+    // clearList();
 
     ellipse.classList.remove('is-hidden');
     const response = await fetch.makesRequest();
@@ -139,8 +136,6 @@ async function infiniteScroll(e) {
     renderGallery(hits);
 
     simpleLightbox();
-
- 
   } catch (error) {
     window.removeEventListener('scroll', createCards);
     setTimeout(

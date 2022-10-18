@@ -45,7 +45,7 @@ export default class fetchApi {
   }
 
   get thisPage() {
-   return this.page = 1;
+   return this.page = 1; 
   }
 
   get query() {

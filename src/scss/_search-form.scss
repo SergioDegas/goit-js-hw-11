@@ -1,9 +1,10 @@
 .search-form{
-
+position: fixed;
+top: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #a5da12ad;
+    background-color:  rgba(78, 23, 141, 0.534);
     margin: 0 auto;
     width: 100%;
     padding: 10px;
@@ -31,7 +32,7 @@ input {
   border: none;
   cursor: pointer;
   &:hover,&:focus{
-     background-color: #8ec27ab2;
+     background-color:rgba(78, 23, 141, 0.644);
 
 }
 }

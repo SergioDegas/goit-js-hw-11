@@ -43,13 +43,15 @@ async function onSearch(e) {
       if (hits.length === 0) {
         window.removeEventListener('scroll', createCards);
 
-        ellipse.classList.add('is-hidden');
+        // ellipse.classList.add('is-hidden');
         setTimeout(
           Notify.info(
             'Sorry, there are no images matching your search query. Please try again.'
           ),
           0
         );
+        ellipse.classList.add('is-hidden');
+
       } else {
         ellipse.classList.remove('is-hidden');
         Notify.success(`Hooray! We found ${totalHits} images.`);

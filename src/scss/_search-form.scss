@@ -36,3 +36,35 @@ input {
 
 }
 }
+
+
+
+  .btn {
+    // display: block;
+    background-color: rgba(78, 23, 141, 0.534);
+    margin: 5px;
+    border: none;
+    color: white;
+    padding: 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+  }
+
+  .load-more {
+    // display: block;
+    // display:flex;
+// position: fixed;
+// bottom: 20px;
+// right: 10px;
+    margin: 0 auto;
+    background-color: rgba(78, 23, 141, 0.534);
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  

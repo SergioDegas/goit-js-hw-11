@@ -45,7 +45,7 @@ export default class fetchApi {
   get query() {
     return this.searchQuery;
   }
-  //Контроль  запроса
+  //Контроль  запросаtotalPages
   set query(newQuery) {
     this.searchQuery = newQuery;
   }

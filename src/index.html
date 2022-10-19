@@ -21,12 +21,23 @@
   <!-- Картки зображень -->
 </ul>
 
-<div class="loader-ellips">
-  <span class="loader-ellips__dot"></span>
-  <span class="loader-ellips__dot"></span>
-  <span class="loader-ellips__dot"></span>
-  <span class="loader-ellips__dot"></span>
-</div>
+<div>
+    <button
+      type="button"
+      class="load-more is-hidden"
+      data-action="load-more">LOAD MORE
+      <span
+      class="spinner-border spinner-border-sn spinner is-hidden"
+      role="status"
+      aria-hidden="true"
+      ></span>
+       <span class="label">LOAD MORE</span>
+    </button>
+
+        <p class="end-collection-text is-hidden">
+          End of collection...
+        </p>
+  </div>
     <script src="./index.js" type="module"></script>
   </body>
 </html>

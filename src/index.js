@@ -4,26 +4,36 @@ import SimpleLightbox from 'simplelightbox';
 import { Notify } from 'notiflix';
 import fetchApi from './js/HTTP';
 import { renderGallery } from './hbs/createCards.js';
-
+import LoadMoreButton from './js/loadMoreBtn';
+// const btn = new LoadMoreButton()
 const fetch = new fetchApi();
+
 let cardsGallery = document.querySelector('.gallery ');
 const onSearchForm = document.querySelector('#search-form');
 onSearchForm.addEventListener('submit', onSearch);
-const ellipse = document.querySelector('.loader-ellips');
+const button = document.querySelector('[data-action="load-more"]');
+const ButtonLoad = new LoadMoreButton({
+  selector: '[data-action="load-more"]',
+  hidden: true,
+});
+button.addEventListener('click', onLoadMore);
 
-ellipse.classList.add('is-hidden');
 clearList();
+console.log(button);
 async function onSearch(e) {
   e.preventDefault();
+
+  if (!button.classList.contains('is-hidden')) {
+    button.classList.add('is-hidden');
+  }
+
   fetch.searchQuery = e.currentTarget.elements.searchQuery.value;
   fetch.resetPage();
-  clearList();
+  // clearList();
 
   try {
     if (fetch.searchQuery === '') {
-      ellipse.classList.add('is-hidden');
-
-      // clearList();
+      clearList();
       Notify.failure('Please enter your search data.');
     } else {
       const response = await fetch.makesRequest();
@@ -31,76 +41,47 @@ async function onSearch(e) {
         data: { hits, total, totalHits },
       } = response;
 
-      // let totalPages = totalHits / fetch.perPage;
-
-      // // console.log(totalPages);
-      // if (fetch.thisPage > totalPages) {
-      //   ellipse.classList.add('is-hidden');
-      // }
-
       if (hits.length === 0) {
-        window.removeEventListener('scroll', createCards);
+        button.classList.add('is-hidden');
 
-        // ellipse.classList.add('is-hidden');
         setTimeout(
           Notify.info(
             'Sorry, there are no images matching your search query. Please try again.'
           ),
           0
         );
-        ellipse.classList.add('is-hidden');
       } else {
-        ellipse.classList.remove('is-hidden');
+        // ButtonLoad.disable();
+        clearList();
+        ButtonLoad.disable();
+
         Notify.success(`Hooray! We found ${totalHits} images.`);
         renderGallery(hits);
+        ButtonLoad.enable();
 
-        window.addEventListener('scroll', createCards);
-        fetch.incrementPage();
+        ButtonLoad.show();
+        button.classList.remove('is-hidden');
+    simpleLightbox();
 
-        // createCards();        // window.addEventListener('scroll', createCards);
       }
-      if (total < 40 && fetch.page >= fetch.thisPage) {
-        window.removeEventListener('scroll', createCards);
-        ellipse.classList.add('is-hidden');
+      // let totalPages = totalHits / fetch.perPage;
+      // console.log(Math.round(totalPages));
+      // console.log(fetch);
+      if (total < 40 && fetch.page >= Math.round(totalPages)) {
+        // ButtonLoad.hide();
+        // ButtonLoad.enable();
         Notify.failure(
           "We're sorry, but you've reached the end of search results."
         );
       }
-
-      // const allCards = totalHits / hits.length;
-      // console.log(hits.length);
-      // console.log(totalHits)
-      // ellipse.classList.remove('is-hidden');
     }
-
-
-    
+    // ButtonLoad.show();
   } catch (error) {
-      // console.loh(fetch.page);
+        ButtonLoad.enable();
+ Notify.failure("We're sorry, but you've reached the end of search results.");
+        button.classList.add('is-hidden');
 
-    window.removeEventListener('scroll', createCards);
-    // setTimeout(
-    //   Notify.failure(
-    //     "We're sorry, but you've reached the end of search results."
-    //   ),
-    //   10
-    // );
-
-    // console.log(error.message);
-    ellipse.classList.add('is-hidden');
   }
-}
-
-async function createCards() {
-  ellipse.classList.remove('is-hidden');
-  // clearList();
-
-  const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
-  if (scrollTop + clientHeight > scrollHeight - 5) {
-    infiniteScroll();
-  }
-
-  // scroll()
 }
 
 function clearList() {
@@ -108,14 +89,12 @@ function clearList() {
 }
 
 function simpleLightbox() {
-  // e.preventDefault()
   let lightbox = new SimpleLightbox('.gallery a', {
     captions: false,
     captionDelay: 250,
     enableKeyboard: true,
     doubleTapZoom: 5,
   });
-  // console.log(lightbox);
   lightbox.refresh();
 }
 
@@ -130,34 +109,19 @@ function scroll() {
     behavior: 'smooth',
   });
 }
+async function onLoadMore() {
 
-async function infiniteScroll(e) {
-  // e.preventDefault();
-  // fetch.resetPage();
-  // clearList();
+const response = await fetch.makesRequest();
+const {
+  data: { hits },
+} = response;
 
-  try {
-    // clearList();
-
-    ellipse.classList.remove('is-hidden');
-    const response = await fetch.makesRequest();
-    const {
-      data: { hits, total, totalHits },
-    } = response;
-
-    renderGallery(hits);
-
-    simpleLightbox();
-  } catch (error) {
-    window.removeEventListener('scroll', createCards);
-    setTimeout(
-      Notify.failure(
-        "We're sorry, but you've reached the end of search results."
-      ),
-      10
-    );
-
-    // console.log(error.message);
-    ellipse.classList.add('is-hidden');
-  }
-}
+  if (hits.length === 0) {
+        button.classList.add('is-hidden');
+  
+Notify.failure("We're sorry, but you've reached the end of search results.");
+  } else
+    simpleLightbox()
+  fetch.incrementPage
+  renderGallery(hits);
+};

@@ -64,16 +64,7 @@ async function onSearch(e) {
     simpleLightbox();
 
       }
-      // let totalPages = totalHits / fetch.perPage;
-      // console.log(Math.round(totalPages));
-      // console.log(fetch);
-      if (total < 40 && fetch.page >= Math.round(totalPages)) {
-        // ButtonLoad.hide();
-        // ButtonLoad.enable();
-        Notify.failure(
-          "We're sorry, but you've reached the end of search results."
-        );
-      }
+    
     }
     // ButtonLoad.show();
   } catch (error) {
